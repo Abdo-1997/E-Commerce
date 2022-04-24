@@ -35,14 +35,14 @@ namespace E_Commerce
             });
             #endregion
             #region Add Database
-            services.AddDbContext<DataContext>(
-          options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            /*services.AddDbContext<DataContext>(
+          options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));*/
             #endregion
             #region Register Dependancies
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            /*services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IProductService), typeof(ProductService));
             services.AddScoped(typeof(IMainCategoryServices), typeof(MainCategoryServices));
-            services.AddScoped(typeof(ISupCategoryServices), typeof(SupCategoryServices));
+            services.AddScoped(typeof(ISupCategoryServices), typeof(SupCategoryServices));*/
             #endregion
         }
 

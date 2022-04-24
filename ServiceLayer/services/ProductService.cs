@@ -93,6 +93,7 @@ namespace ServiceLayer
              await _ProductRepository.Delete(id);
         }
         #endregion
+
         #region Extention methode
         public async Task<byte[]> ToArryOfByte(IFormFile file)
         {
@@ -100,6 +101,28 @@ namespace ServiceLayer
             await file.CopyToAsync(datastream);
             return  datastream.ToArray();
             
+        }
+        #endregion
+
+        #region Find BY Category
+        public IEnumerable<ProductViewModel> GetProductsByCategory(string category)
+        {
+            IEnumerable<ProductViewModel> x = _ProductRepository.GetByCategory(category).Select(
+              product => new ProductViewModel()
+                {
+                 
+                id=product.id,
+                name=product.name,
+                maincategoryid=product.maincategoryid,
+                sellername=product.sellername,
+                supcategoryid=product.supcategoryid,
+                pictures=product.pictures,
+                price=product.price,
+                quantity=product.quantity,
+               
+                }
+                );
+            return x;
         }
         #endregion
     }

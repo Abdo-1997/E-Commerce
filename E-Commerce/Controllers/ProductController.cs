@@ -28,7 +28,7 @@ namespace E_Commerce.Controllers
         {
            IEnumerable<ProductViewModel> product=await _productservice.GetProducts();
             HttpContext.Session.SetInt32("session",20);
-           
+            
             return View(product);
         }
         public async Task<IActionResult> CreateProduct()
@@ -57,6 +57,12 @@ namespace E_Commerce.Controllers
             await _productservice.RemoveProduct(id);
             return View();
         }
-     
+        #region Find by category
+        public  IActionResult GetByCategory(string category)
+        {
+          IEnumerable<ProductViewModel> products =   _productservice.GetProductsByCategory(category);
+            return View(nameof(Index), products);
+        }
+        #endregion
     }
 }

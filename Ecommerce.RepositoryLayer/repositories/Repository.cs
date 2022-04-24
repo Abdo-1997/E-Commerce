@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Ecommerce.DomainLayer.models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,20 +19,30 @@ namespace Ecommerce.RepositoryLayer.repositories
             entities = dbContext.Set<T>();
 
         }
+        #region Add
         public async Task< int> add(T obj)
         {
             entities.Add(obj);
             return await _applicationDbContext.SaveChangesAsync();
         }
+        #endregion
+
+        #region Get All
         public async Task<IEnumerable<T>> GetAll()
         {
             return await entities.ToListAsync();
         }
+        #endregion
+
+        #region Get By Id
         public async Task< T> GetById(int id)
         {
             return await entities.FindAsync(id);
 
         }
+        #endregion
+
+        #region Delete
         public async Task Delete(int id)
         {
 
@@ -39,5 +50,13 @@ namespace Ecommerce.RepositoryLayer.repositories
              entities.Remove(x);
             _applicationDbContext.SaveChanges();
         }
+        #endregion
+
+        #region Get BY category 
+        public IQueryable<Product> GetByCategory(string category)
+        {
+           return _applicationDbContext.products.Where(x => x.maincat.name == category);
+        }
+        #endregion
     }
 }

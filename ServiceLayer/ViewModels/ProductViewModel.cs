@@ -14,14 +14,14 @@ namespace ServiceLayer.ViewModels
       
         public string name { get; set; }
      
-       // public string sellername { get; set; }
+        public string sellername { get; set; }
      
         public int quantity { get; set; }
       
 
         public decimal price { get; set; }
     
-      //  public string description { get; set; }
+       // public string description { get; set; }
 
 
         
@@ -29,10 +29,9 @@ namespace ServiceLayer.ViewModels
 
        
 
-    //   public int? supcategoryid { set; get; }
+       public int? supcategoryid { set; get; }
         
         public picture pictures { set; get; }
-       // public maincat maincat { set; get; }
-      //  public IEnumerable<supcat> supcats { set; get; }
+     
     }
 }

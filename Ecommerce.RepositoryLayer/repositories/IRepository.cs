@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Ecommerce.DomainLayer.models;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ecommerce.RepositoryLayer.repositories
@@ -8,6 +10,7 @@ namespace Ecommerce.RepositoryLayer.repositories
         Task<int> add(T obj);
         Task Delete(int id);
         Task<IEnumerable<T>> GetAll();
+        IQueryable<Product> GetByCategory(string category);
         Task<T> GetById(int id);
     }
 }

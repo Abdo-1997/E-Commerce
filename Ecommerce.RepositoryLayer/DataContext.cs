@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Ecommerce.DomainLayer;
 using Ecommerce.DomainLayer.models;
-using Microsoft.AspNetCore.Identity;
 
 namespace Ecommerce.RepositoryLayer
 {

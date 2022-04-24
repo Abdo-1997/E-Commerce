@@ -1,0 +1,13 @@
+﻿@using ServiceLayer.ViewModels;
+@model CategoryViewModel
+<form asp-action="create" asp-controller="Category">
+    <div class="form-group">
+        <div class="row">
+             <div class="col-3"><label asp-for="name"></label></div>
+             <div class="col-6"><input asp-for="name" class="form-control"/></div>
+             <div class="col-3"><input type="submit" value="add" class="btn btn-success"></div>
+
+      </div>
+       
+    </div>
+</form>

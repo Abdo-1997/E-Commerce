@@ -1,0 +1,103 @@
+﻿@using ServiceLayer.ViewModels
+@model CreateProductViewModel
+
+
+
+<form asp-action="CreateProduct" asp-controller="Product" method="post" class="form" enctype="multipart/form-data" >
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="name" class="col-form-label"></label>
+                    <input asp-for="name" class="form-control" />
+                    <span asp-validation-for="name"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="sellername" class="form-lable"></label>
+                    <input asp-for="sellername" class="form-control" />
+                    <span asp-validation-for="sellername"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="description" class="form-lable"></label>
+                    <input asp-for="description" class="form-control" />
+                    <span asp-validation-for="description"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="price" class="col-form-label"></label>
+                    <input asp-for="price" class="form-control" />
+                    <span asp-validation-for="price"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="maincategoryid" class="control-lable"></label>
+                    <select asp-for="maincategoryid" asp-items="ViewBag.MainCategory" class="form-control">
+                        <option value="">Choose Main Category</option>
+                    </select>
+                </div>
+                <div class="form-group">
+              
+                 <label asp-for="supCategoryid" class="control-lable"></label>
+                    <select asp-for="supCategoryid" asp-items="ViewBag.SupCategory" class="form-control form-select" multiple>
+                        <option value="">Choose sup Category</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="quantity" class="col-form-label"></label>
+                    <input asp-for="quantity" class="form-control" />
+                    <span asp-validation-for="quantity"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="brandname" class="col-form-label"></label>
+                    <input asp-for="brandname" class="form-control" />
+                    <span asp-validation-for="brandname"></span>
+                </div>
+            </div>
+
+
+
+
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">
+                        <input asp-for="FormFile1" type="file" class="form-control-file"
+                               onchange="document.getElementById('profilepic').src=window.URL.createObjectURL(this.files[0])" />
+                        <img id="profilepic" style="height:25vh;width:20vw" />
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="FormFile4" type="file" class="form-control-file"
+                               onchange="document.getElementById('profilepic1').src=window.URL.createObjectURL(this.files[0])" />
+                        <img id="profilepic1" style="height:25vh;width:20vw" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <input asp-for="FormFile2" type="file" class="form-control-file"
+                               onchange="document.getElementById('profilepic2').src=window.URL.createObjectURL(this.files[0])" />
+                        <img id="profilepic2" style="height:25vh;width:20vw" />
+                    </div>
+                    <div class=col-6>
+                        <input asp-for="FormFile3" type="file" class="form-control-file"
+                               onchange="document.getElementById('profilepic3').src=window.URL.createObjectURL(this.files[0])" />
+                        <img id="profilepic3" style="height:25vh;width:20vw" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row p-3 mt-3">
+        <input type="submit" value="add" class="btn btn-lg btn-outline-success" />
+
+    </div>
+
+</form>
+
+  <script src="~/js/jquery-1.11.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#dropDownList-example').multiSelect();
+    });
+</script>

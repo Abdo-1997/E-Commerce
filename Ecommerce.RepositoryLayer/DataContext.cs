@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Ecommerce.DomainLayer;
 using Ecommerce.DomainLayer.models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Ecommerce.RepositoryLayer
 {
-    public class DataContext:DbContext
+    public class DataContext: IdentityDbContext<IdentityUser>
     {
         public DataContext(DbContextOptions options):base(options)
         {
@@ -24,6 +26,14 @@ namespace Ecommerce.RepositoryLayer
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies();
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+       
+            // Customize the ASP.NET Identity model and override the defaults if needed.
+            // For example, you can rename the ASP.NET Identity table names and more.
+            // Add your customizations after calling base.OnModelCreating(builder);
         }
     }
 }

@@ -12,6 +12,7 @@ using Ecommerce.RepositoryLayer.repositories;
 using ServiceLayer;
 using Microsoft.EntityFrameworkCore;
 using ServiceLayer.services;
+using Microsoft.AspNetCore.Identity;
 
 namespace E_Commerce
 {
@@ -35,14 +36,20 @@ namespace E_Commerce
             });
             #endregion
             #region Add Database
-            /*services.AddDbContext<DataContext>(
-          options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));*/
+            services.AddDbContext<DataContext>(options =>
+                   options.UseSqlServer(
+                       Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders();
+
             #endregion
             #region Register Dependancies
-            /*services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IProductService), typeof(ProductService));
             services.AddScoped(typeof(IMainCategoryServices), typeof(MainCategoryServices));
-            services.AddScoped(typeof(ISupCategoryServices), typeof(SupCategoryServices));*/
+            services.AddScoped(typeof(ISupCategoryServices), typeof(SupCategoryServices));
             #endregion
         }
 
@@ -68,6 +75,7 @@ namespace E_Commerce
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages(); 
             });
         }
     }

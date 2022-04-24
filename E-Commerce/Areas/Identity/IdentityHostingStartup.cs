@@ -1,5 +1,4 @@
 ﻿using System;
-using E_Commerce.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -14,14 +13,14 @@ namespace E_Commerce.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
-                services.AddDbContext<E_CommerceContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("E_CommerceContextConnection")));
+            //builder.ConfigureServices((context, services) => {
+            //    services.AddDbContext<E_CommerceContext>(options =>
+            //        options.UseSqlServer(
+            //            context.Configuration.GetConnectionString("E_CommerceContextConnection")));
 
-                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<E_CommerceContext>();
-            });
+            //    services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //        .AddEntityFrameworkStores<E_CommerceContext>();
+          //  });
         }
     }
 }

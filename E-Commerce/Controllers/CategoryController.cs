@@ -15,9 +15,9 @@ namespace E_Commerce.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var x = await _categoryServices.GetAllMainCategory();
-            IEnumerable<CategoryViewModel> categories =x;
-            return View(categories);
+            //var x = await _categoryServices.GetAllMainCategory();
+            //IEnumerable<CategoryViewModel> categories 
+            return View(await _categoryServices.GetAllMainCategory());
         }
         [ValidateAntiForgeryToken]
         [HttpPost]

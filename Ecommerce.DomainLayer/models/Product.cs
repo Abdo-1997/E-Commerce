@@ -37,10 +37,10 @@ namespace Ecommerce.DomainLayer.models
         public string gender { get; set; }
 
 
-        [ForeignKey("maincats")]
+        [ForeignKey("maincat")]
         public int? maincategoryid { get; set; }
 
-        [ForeignKey("supcats")]
+        [ForeignKey("supcat")]
 
         public int? supcategoryid { set; get; }
         [ForeignKey("pictures")]
@@ -48,7 +48,7 @@ namespace Ecommerce.DomainLayer.models
          public virtual picture pictures { set; get; }
          public virtual maincat maincat{ set; get; } 
          public virtual supcat supcat { set; get; }
-         
-
+        public virtual IEnumerable<Cart> cart { set; get; }
+      
     }
 }

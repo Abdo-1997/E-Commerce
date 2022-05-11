@@ -19,6 +19,123 @@ namespace Ecommerce.RepositoryLayer.Migrations
                 .HasAnnotation("ProductVersion", "5.0.16")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Ecommerce.DomainLayer.models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<int?>("cartid")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("profilepic")
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("cartid")
+                        .IsUnique()
+                        .HasFilter("[cartid] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Ecommerce.DomainLayer.models.Cart", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Productid")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Productid");
+
+                    b.ToTable("cart");
+                });
+
+            modelBuilder.Entity("Ecommerce.DomainLayer.models.CartItems", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("cartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("cartId");
+
+                    b.HasIndex("productId");
+
+                    b.ToTable("cartitems");
+                });
+
             modelBuilder.Entity("Ecommerce.DomainLayer.models.Product", b =>
                 {
                     b.Property<int>("id")
@@ -39,9 +156,6 @@ namespace Ecommerce.RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("maincategoryid")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("maincatid")
                         .HasColumnType("int");
 
                     b.Property<string>("name")
@@ -66,18 +180,15 @@ namespace Ecommerce.RepositoryLayer.Migrations
                     b.Property<int?>("supcategoryid")
                         .HasColumnType("int");
 
-                    b.Property<int?>("supcatid")
-                        .HasColumnType("int");
-
                     b.HasKey("id");
 
-                    b.HasIndex("maincatid");
+                    b.HasIndex("maincategoryid");
 
                     b.HasIndex("picturesid")
                         .IsUnique()
                         .HasFilter("[picturesid] IS NOT NULL");
 
-                    b.HasIndex("supcatid");
+                    b.HasIndex("supcategoryid");
 
                     b.ToTable("products");
                 });
@@ -91,6 +202,9 @@ namespace Ecommerce.RepositoryLayer.Migrations
 
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("picture")
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("id");
 
@@ -187,71 +301,6 @@ namespace Ecommerce.RepositoryLayer.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -279,12 +328,10 @@ namespace Ecommerce.RepositoryLayer.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -321,12 +368,10 @@ namespace Ecommerce.RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -336,11 +381,46 @@ namespace Ecommerce.RepositoryLayer.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Ecommerce.DomainLayer.models.ApplicationUser", b =>
+                {
+                    b.HasOne("Ecommerce.DomainLayer.models.Cart", "cart")
+                        .WithOne("user")
+                        .HasForeignKey("Ecommerce.DomainLayer.models.ApplicationUser", "cartid");
+
+                    b.Navigation("cart");
+                });
+
+            modelBuilder.Entity("Ecommerce.DomainLayer.models.Cart", b =>
+                {
+                    b.HasOne("Ecommerce.DomainLayer.models.Product", null)
+                        .WithMany("cart")
+                        .HasForeignKey("Productid");
+                });
+
+            modelBuilder.Entity("Ecommerce.DomainLayer.models.CartItems", b =>
+                {
+                    b.HasOne("Ecommerce.DomainLayer.models.Cart", "Cart")
+                        .WithMany("cartItems")
+                        .HasForeignKey("cartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce.DomainLayer.models.Product", "product")
+                        .WithMany()
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("product");
+                });
+
             modelBuilder.Entity("Ecommerce.DomainLayer.models.Product", b =>
                 {
                     b.HasOne("Ecommerce.DomainLayer.models.maincat", "maincat")
                         .WithMany("products")
-                        .HasForeignKey("maincatid");
+                        .HasForeignKey("maincategoryid");
 
                     b.HasOne("Ecommerce.DomainLayer.models.picture", "pictures")
                         .WithOne("product")
@@ -348,7 +428,7 @@ namespace Ecommerce.RepositoryLayer.Migrations
 
                     b.HasOne("Ecommerce.DomainLayer.models.supcat", "supcat")
                         .WithMany("products")
-                        .HasForeignKey("supcatid");
+                        .HasForeignKey("supcategoryid");
 
                     b.Navigation("maincat");
 
@@ -368,7 +448,7 @@ namespace Ecommerce.RepositoryLayer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Ecommerce.DomainLayer.models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -377,7 +457,7 @@ namespace Ecommerce.RepositoryLayer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Ecommerce.DomainLayer.models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -392,7 +472,7 @@ namespace Ecommerce.RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Ecommerce.DomainLayer.models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -401,11 +481,23 @@ namespace Ecommerce.RepositoryLayer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Ecommerce.DomainLayer.models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Ecommerce.DomainLayer.models.Cart", b =>
+                {
+                    b.Navigation("cartItems");
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("Ecommerce.DomainLayer.models.Product", b =>
+                {
+                    b.Navigation("cart");
                 });
 
             modelBuilder.Entity("Ecommerce.DomainLayer.models.maincat", b =>

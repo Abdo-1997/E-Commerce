@@ -22,19 +22,27 @@ namespace ServiceLayer.ViewModels
         public string sellername { get; set; }
         [Required(ErrorMessage = "this field is required")]
         public int quantity { get; set; }
-        [Required]
+       
+        [Required(ErrorMessage = "this field is required")]
 
         public decimal price { get; set; }
         [Required]
 
         public string description { get; set; }
+        [Required]
         public string brandname { set; get; }
+        [Required]
         public int maincategoryid { get; set; }
+        [Required]
         public int supCategoryid{ set; get; }
+        [Required]
         #region pictures
         public IFormFile FormFile1 { set; get; }
+        [Required]
         public IFormFile FormFile2 { set; get; }
+        [Required]
         public IFormFile FormFile3 { set; get; }
+        [Required]
         public IFormFile FormFile4 { set; get; }
 
       

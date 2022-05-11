@@ -57,3 +57,20 @@
 </div>
 
 
+<script >
+   $(function(){
+      function addToCart(){
+             alert("sucsess");
+           $.get("../cart/RemoveFromCart",{id:10},function(
+           data,
+           status,
+           xhr
+           ){
+               if(status="sucsess"){
+                  alert("sucsess");
+               }
+
+           });
+       });
+   });
+</script>

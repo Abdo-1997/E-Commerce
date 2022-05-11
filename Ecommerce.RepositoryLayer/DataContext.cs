@@ -8,10 +8,9 @@ using Ecommerce.DomainLayer;
 using Ecommerce.DomainLayer.models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-
 namespace Ecommerce.RepositoryLayer
 {
-    public class DataContext: IdentityDbContext<IdentityUser>
+    public class DataContext: IdentityDbContext<ApplicationUser>
     {
         public DataContext(DbContextOptions options):base(options)
         {
@@ -21,7 +20,8 @@ namespace Ecommerce.RepositoryLayer
         public DbSet<supcat> supcats { set; get; }
         public DbSet<maincat> maincats { set; get; }
         public DbSet<picture> pictures { set; get; }
-
+        public DbSet<Cart> cart { set; get; }
+        public DbSet<CartItems> cartitems { set; get; }
         //enable lazy loading
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

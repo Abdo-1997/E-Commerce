@@ -5,6 +5,7 @@
 @using ServiceLayer.ViewModels;
 
 @model IEnumerable<CategoryViewModel>
+<div class="container">
 <div class="table-responsive container-fluid">
     <table class="table   table-hover table-sm">
         <thead><tr><th>name</th> <th>delete</th></tr></thead>
@@ -19,3 +20,7 @@
     <div class="mb-3 bg-soft-info p-3  mt-2">
 <partial name="_allcat"  model="new CategoryViewModel()"/>
 </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

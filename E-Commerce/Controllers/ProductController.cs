@@ -27,7 +27,7 @@ namespace E_Commerce.Controllers
 
         {
            IEnumerable<ProductViewModel> product=await _productservice.GetProducts();
-            HttpContext.Session.SetInt32("session",20);
+         
             
             return View(product);
         }
@@ -58,6 +58,7 @@ namespace E_Commerce.Controllers
             return View();
         }
         #region Find by category
+        
         public  IActionResult GetByCategory(string category)
         {
           IEnumerable<ProductViewModel> products =   _productservice.GetProductsByCategory(category);

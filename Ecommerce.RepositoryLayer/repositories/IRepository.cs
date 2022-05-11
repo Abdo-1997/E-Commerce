@@ -11,6 +11,8 @@ namespace Ecommerce.RepositoryLayer.repositories
         Task Delete(int id);
         Task<IEnumerable<T>> GetAll();
         IQueryable<Product> GetByCategory(string category);
-        Task<T> GetById(int id);
+        Task<T> GetById(int? id);
+        Task< IEnumerable<CartItems>> GetCartItemsAsync(int id);
+        Task<int> Update(T entity);
     }
 }

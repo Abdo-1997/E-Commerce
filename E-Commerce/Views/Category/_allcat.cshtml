@@ -1,11 +1,15 @@
 ﻿@using ServiceLayer.ViewModels;
 @model CategoryViewModel
+
 <form asp-action="create" asp-controller="Category">
-    <div class="form-group">
+    <div class="form-group bg-gradient p-4 ">
         <div class="row">
-             <div class="col-3"><label asp-for="name"></label></div>
-             <div class="col-6"><input asp-for="name" class="form-control"/></div>
-             <div class="col-3"><input type="submit" value="add" class="btn btn-success"></div>
+             <div class="col-3"><label asp-for="name" class="form-label text-center text-"></label></div>
+             <div class="col-4"><input asp-for="name" class="form-control"/>
+                   <span asp-validation-for="name" class="text-danger">  </span>
+             </div>
+           
+             <div class="col-3 text-white "><input type="submit" value="add" class="btn btn-success text-white"></div>
 
       </div>
        

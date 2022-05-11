@@ -55,3 +55,7 @@ $(document).ready(function() {
     // End roduct detail
 
 });
+
+
+
+/* AJAX Methodes*/

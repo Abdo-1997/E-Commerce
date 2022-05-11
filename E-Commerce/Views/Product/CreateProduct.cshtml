@@ -36,7 +36,7 @@
                 <div class="form-group">
               
                  <label asp-for="supCategoryid" class="control-lable"></label>
-                    <select asp-for="supCategoryid" asp-items="ViewBag.SupCategory" class="form-control form-select" multiple>
+                    <select asp-for="supCategoryid" asp-items="ViewBag.SupCategory" class="form-control form-select" >
                         <option value="">Choose sup Category</option>
                     </select>
                 </div>
@@ -57,25 +57,25 @@
 
             <div class="col-6">
                 <div class="row">
-                    <div class="col-6">
-                        <input asp-for="FormFile1" type="file" class="form-control-file"
-                               onchange="document.getElementById('profilepic').src=window.URL.createObjectURL(this.files[0])" />
-                        <img id="profilepic" style="height:25vh;width:20vw" />
+                    <div class="col-6 ">
+                        <input asp-for="FormFile1" type="file" class="form-control border-primary "
+                               onchange="document.getElementById('profilepic').src=window.URL.createObjectURL(this.files[0])"  />
+                        <img  id="profilepic"  style="height:25vh;width:20vw" class="figure-img"/ >
                     </div>
                     <div class="col-6">
-                        <input asp-for="FormFile4" type="file" class="form-control-file"
+                        <input asp-for="FormFile4" type="file" class="form-control"
                                onchange="document.getElementById('profilepic1').src=window.URL.createObjectURL(this.files[0])" />
                         <img id="profilepic1" style="height:25vh;width:20vw" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <input asp-for="FormFile2" type="file" class="form-control-file"
+                        <input asp-for="FormFile2" type="file" class="form-control"
                                onchange="document.getElementById('profilepic2').src=window.URL.createObjectURL(this.files[0])" />
                         <img id="profilepic2" style="height:25vh;width:20vw" />
                     </div>
                     <div class=col-6>
-                        <input asp-for="FormFile3" type="file" class="form-control-file"
+                        <input asp-for="FormFile3" type="file" class="form-control"
                                onchange="document.getElementById('profilepic3').src=window.URL.createObjectURL(this.files[0])" />
                         <img id="profilepic3" style="height:25vh;width:20vw" />
                     </div>
@@ -94,10 +94,6 @@
 
 </form>
 
-  <script src="~/js/jquery-1.11.0.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $('#dropDownList-example').multiSelect();
-    });
-</script>
+
+

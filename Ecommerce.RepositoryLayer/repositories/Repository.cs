@@ -35,7 +35,7 @@ namespace Ecommerce.RepositoryLayer.repositories
         #endregion
 
         #region Get By Id
-        public async Task< T> GetById(int id)
+        public async Task< T> GetById(int? id)
         {
             return await entities.FindAsync(id);
 
@@ -55,7 +55,24 @@ namespace Ecommerce.RepositoryLayer.repositories
         #region Get BY category 
         public IQueryable<Product> GetByCategory(string category)
         {
-           return _applicationDbContext.products.Where(x => x.maincat.name == category);
+            var cat = _applicationDbContext.maincats.FirstOrDefault(x => x.name == category);
+            IQueryable<Product> products= _applicationDbContext.products.Where(x => x.maincat.id == cat.id);
+            return products;
+        }
+        #endregion
+
+        #region update 
+        public async Task<int> Update(T entity)
+        {
+            entities.Update(entity);
+           return await _applicationDbContext.SaveChangesAsync();
+        }
+        #endregion
+
+        #region Get Cart Items By User Id
+        public async Task<IEnumerable<CartItems>> GetCartItemsAsync(int id)
+        {
+            return await _applicationDbContext.cartitems.Where(x => x.cartId == id).ToListAsync();
         }
         #endregion
     }

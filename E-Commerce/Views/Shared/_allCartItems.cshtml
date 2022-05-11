@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CartItemViewModel>
+@{
+    Layout = null;
+}
+<div class="container min-vh-100 mt-4">
+<table class="table table-hover table-borderless ">
+<thead class="text-center">
+    <tr>
+        <th>picture</th>
+        <th>name</th>
+        <th>quantity</th>
+        <th>Price</th>
+        <th>mange</th>
+    </tr>
+</thead>
+<tbody class="text-center">
+     @{ decimal productPrice=0;
+          @foreach (var item in Model)
+          {
+       <tr>
+           <td><img class="rounded-3 " src="data:image/*;base64,@(Convert.ToBase64String(@item.picture))" alt="Product Image 9" style="width:10vh;"></td>
+           <td>@item.productname </td>
+           <td>     
+            @item.productquantity
+           </td>
+           <td>@item.productPrice</td>
+           <td> <form asp-action="RemoveFromCart" asp-route-id="@item.cartitemid" onsubmit="return jQueryAjaxDelete(this)"  class="d-inline">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+                        
+           </td>
+                </tr>
+               
+               
+                 productPrice += item.productPrice;
+            }
+            }
+  
+</tbody>
+<tfoot>
+    <tr ><td class="text-center" colspan="5"> total price = @productPrice <i class="fa-solid fa-money-check-dollar text-success"></i></td> </tr>
+</tfoot>
+    </table>
+   </div>

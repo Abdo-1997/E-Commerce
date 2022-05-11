@@ -11,7 +11,7 @@ namespace Ecommerce.DomainLayer.models
     {
         public int id { get; set; }
         public string name { get; set; }
-
+        public byte[] picture { get; set; }
         public virtual IEnumerable<Product> products { set; get; }
     }
 }

@@ -13,6 +13,7 @@ using ServiceLayer;
 using Microsoft.EntityFrameworkCore;
 using ServiceLayer.services;
 using Microsoft.AspNetCore.Identity;
+using Ecommerce.DomainLayer.models;
 
 namespace E_Commerce
 {
@@ -40,9 +41,17 @@ namespace E_Commerce
                    options.UseSqlServer(
                        Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<ApplicationUser, IdentityRole>(
+                options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.User.RequireUniqueEmail = false;
+                }
+                )
                 .AddEntityFrameworkStores<DataContext>()
-                .AddDefaultTokenProviders();
+              .AddDefaultTokenProviders().AddDefaultUI();
+            services.AddRazorPages();
+
 
             #endregion
             #region Register Dependancies
@@ -50,6 +59,8 @@ namespace E_Commerce
             services.AddScoped(typeof(IProductService), typeof(ProductService));
             services.AddScoped(typeof(IMainCategoryServices), typeof(MainCategoryServices));
             services.AddScoped(typeof(ISupCategoryServices), typeof(SupCategoryServices));
+            services.AddScoped(typeof(ICartServices), typeof(CartServices));
+            services.AddHealthChecks();
             #endregion
         }
 
@@ -65,11 +76,13 @@ namespace E_Commerce
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
+         
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
